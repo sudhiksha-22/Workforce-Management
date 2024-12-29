@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Approval</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* General Body Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            width: 250px;
+            height: 100vh;
+            background-color: #0E4AA0;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+        }
+
+        .navbar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .navbar nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .navbar nav ul li {
+            margin: 15px 0;
+        }
+
+        .navbar nav ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .navbar nav ul li a:hover {
+            background-color: #0C3A7B;
+        }
+
+        /* Container Styles */
+        .container {
+            margin-left: 270px;
+            /* Space for the fixed navbar */
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #0E4AA0;
+        }
+
+        /* Form Styles */
+        form {
+            display: inline-block;
+        }
+
+        form button {
+            background-color: #0E4AA0;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #0C3A7B;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #0E4AA0;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Align Buttons in the Table */
+        table td form {
+            display: inline-block;
+        }
+
+        table td form button {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <h2>Supervisor Dashboard</h2>
+
+        <nav>
+            <ul>
+                <li><a href="/allocate_work"><strong>Allocate Work</strong></a></li>
+                <li><a href="/current_shift_schedule"><strong>Current Shift Status</strong></a></li>
+                <li><a href="/generate_report"><strong>Generate Report</strong></a></li>
+                <li><a href="/key_metrics"><strong>Performance Metrics</strong></a></li>
+                <li><a href="/leave_approval"><strong>Leave Approval</strong></a></li>
+                <li><a href="/attendance_log"><strong>Attendance Log</strong></a></li>
+                <li><a href="/greivances"><strong>Grievances</strong></a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container">
+        <h2>Leave Requests</h2>
+        <table>
+            <tr>
+                <th>Employee Name</th>
+                <th>Leave Reason</th>
+                <th>Action</th>
+            </tr>
+            {% for employee, details in dict.items() %}
+            <tr>
+                <td>{{ employee }}</td>
+                <td>{{ details[0] }}</td>
+                <td>
+                    <!-- Form for approving/declining leave -->
+                    <form action="/staff_leave_request_action" method="POST">
+                        <input type="hidden" name="username" value="{{ employee }}" />
+                        <button type="submit" name="action" value="approve">Approve</button>
+                    </form>
+                    <form action="/staff_leave_request_action" method="POST">
+                        <input type="hidden" name="username" value="{{ employee }}" />
+                        <button type="submit" name="action" value="decline">Decline</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+
+</html>

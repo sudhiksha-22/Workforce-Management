@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .dashboard-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .button {
+            width: 100%;
+            padding: 15px;
+            background-color: #3498db;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+
+        .button:active {
+            background-color: #1f639a;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Welcome, {{ username }}!</h1>
+        <p>Select an option:</p>
+        
+        <div class="button-container">
+            <!-- Button to view the logged-in user's attendance -->
+            <button class="button" onclick="window.location.href='/manager_attendance'">
+                View My Attendance
+            </button>
+
+            <!-- Button to view all staff attendance -->
+            <button class="button" onclick="window.location.href='/view_all_staff'">
+                View All Staff Attendance
+            </button>
+
+            <!-- Button to view all supervisors attendance -->
+            <button class="button" onclick="window.location.href='/view_all_supervisors'">
+                View All Supervisor Attendance
+            </button>
+        </div>
+    </div>
+</body>
+</html>

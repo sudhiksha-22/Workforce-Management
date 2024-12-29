@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Allocation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 200px;
+            background-color: #004080; /* Dark Blue */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        width: 100%;
+        }
+
+        .sidebar ul li {
+        padding: 20px;
+        }
+
+        .sidebar ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+        display: block;
+        }
+
+        .sidebar ul li a:hover {
+        background-color: #003366; /* Slightly darker blue for hover */
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #0E4AA0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            background-color: #0E4AA0;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 12px;
+            border-radius: 4px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0b3e7f;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .message.success {
+            color: green;
+        }
+
+        .message.error {
+            color: red;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+    </style>
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Prevent the form from submitting the usual way
+
+            // Show the alert notification
+            alert('Work has been successfully allocated!');
+
+            // Clear the form
+            document.getElementById('supervisor').value = '';
+            document.getElementById('task').value = '';
+            document.getElementById('priority').value = 'low';
+            document.getElementById('deadline').value = '';
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <ul>
+            <li><a href="/manager_dashboard">Dashboard</a></span> </li>
+            <li><a href="/profile">Profile</span> </li>
+            <li><a href="/current_shift_schedule">Shift Status</a></span> </li>
+            <li><a href="/report">Report Analytics</a></span> </li>
+            <li><a href="/enroll_terminate">Enroll Employee</a></span> </li>
+            <li><a href="/view-compalint-manager">Grievances</a></span> </li>
+            <li><a href="/m_key_metrics">Performance Metrics</a></span> </li>            
+            <li><a href="/manager_com_att">Attendance Log</a></span> </li>
+
+
+        </ul>
+    </div>
+
+    <!-- Main content (work allocation form) -->
+    <div class="content">
+        <div class="container">
+            <h2>Allocate Work to Supervisor</h2>
+            <!-- Work allocation form -->
+            <form id="workAllocationForm" onsubmit="handleFormSubmit(event)">
+
+                <!-- Supervisor Name -->
+                <label for="supervisor">Supervisor Name:</label>
+                <input type="text" id="supervisor" name="supervisor" required placeholder="Enter supervisor name">
+
+                <!-- Task Description -->
+                <label for="task">Task:</label>
+                <textarea id="task" name="task" rows="4" required placeholder="Describe the task"></textarea>
+
+                <!-- Priority -->
+                <label for="priority">Priority:</label>
+                <select id="priority" name="priority" required>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+
+                <!-- Deadline -->
+                <label for="deadline">Deadline:</label>
+                <input type="date" id="deadline" name="deadline" required>
+
+                <input type="submit" value="Allocate Work">
+            </form>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report View</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f1f1f1;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        h1, h2 {
+            color: #040303;
+        }
+
+        h3 {
+            color: #999;
+        }
+
+        .btn {
+            background: #0e4aa0;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            color: #f05462;
+            background: white;
+            padding: 3px 8px;
+            border: 2px solid #f05462;
+        }
+
+        .container {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .report-header {
+            width: 80%;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .report-header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .report-header .details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .report-header .details span {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .report-header .timestamp {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .report-body {
+            width: 80%;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .report-body h3 {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .report-body p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .report-actions {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .approve-btn {
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .approve-btn:hover {
+            background-color: darkgreen;
+        }
+
+        .reject-btn {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .reject-btn:hover {
+            background-color: darkred;
+        }
+
+        .feedback-btn {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .feedback-btn:hover {
+            background-color: darkblue;
+        }
+
+        .download-btn {
+            background-color: #0e4aa0;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            background-color: #063373;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Report Header -->
+        <div class="report-header">
+            <img src="user3.png" alt="Profile Image">
+            <div class="details">
+                <span><strong>Sender:</strong> John Doe</span>
+                <span><strong>Department:</strong> Financial</span>
+                <span><strong>Subject:</strong> Annual Revenue Report</span>
+                <span class="timestamp"><strong>Sent at:</strong> 10:30 AM, September 20, 2024</span>
+            </div>
+        </div>
+
+        <!-- Report Body -->
+        <div class="report-body">
+            <h3>Report Summary</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque purus nec ex tincidunt, 
+                vitae tincidunt metus aliquet. Donec tempor viverra purus, a vehicula orci aliquet eget. Integer ut 
+                velit ac erat gravida dapibus. Morbi volutpat lacus nec erat dapibus, at eleifend purus accumsan. 
+                Vivamus malesuada velit a lacus viverra, nec tempor ante hendrerit. Donec vel lacus non neque varius 
+                tincidunt id ut augue. Proin luctus felis et tincidunt pharetra. Nulla facilisi.
+            </p>
+
+            <p>
+                Mauris laoreet, nisi sed sollicitudin luctus, enim risus porttitor libero, vel vestibulum magna neque
+                non elit. Vivamus ut consectetur ex, id condimentum ex. Nam sed leo eu ante interdum faucibus. Morbi 
+                vel convallis lectus. Sed pharetra ac libero nec tempor. Vestibulum eget lacus neque. Aenean vulputate 
+                mi eu nisi ullamcorper, sed vulputate urna tincidunt.
+            </p>
+
+            <p>
+                Aliquam vehicula libero ut turpis condimentum, eget vulputate eros mollis. Integer sollicitudin, 
+                libero a convallis fringilla, ex risus interdum lectus, ac tristique felis risus at quam. Nulla facilisi.
+            </p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="report-actions">
+            <button class="approve-btn">Approve</button>
+            <button class="reject-btn">Reject</button>
+            <button class="feedback-btn">Feedback</button>
+            <button class="download-btn" onclick="downloadReport()">Download</button>
+        </div>
+    </div>
+
+    <script>
+        function downloadReport() {
+            const reportText = `
+                Sender: John Doe
+                Department: Financial
+                Subject: Annual Revenue Report
+                Time: 10:30 AM, September 20, 2024
+
+                Report Summary:
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque purus nec ex tincidunt, 
+                vitae tincidunt metus aliquet. Donec tempor viverra purus, a vehicula orci aliquet eget. Integer ut 
+                velit ac erat gravida dapibus. Morbi volutpat lacus nec erat dapibus, at eleifend purus accumsan. 
+                Vivamus malesuada velit a lacus viverra, nec tempor ante hendrerit. Donec vel lacus non neque varius 
+                tincidunt id ut augue. Proin luctus felis et tincidunt pharetra. Nulla facilisi.
+
+                Mauris laoreet, nisi sed sollicitudin luctus, enim risus porttitor libero, vel vestibulum magna neque
+                non elit. Vivamus ut consectetur ex, id condimentum ex. Nam sed leo eu ante interdum faucibus. Morbi 
+                vel convallis lectus. Sed pharetra ac libero nec tempor. Vestibulum eget lacus neque. Aenean vulputate 
+                mi eu nisi ullamcorper, sed vulputate urna tincidunt.
+
+                Aliquam vehicula libero ut turpis condimentum, eget vulputate eros mollis. Integer sollicitudin, 
+                libero a convallis fringilla, ex risus interdum lectus, ac tristique felis risus at quam. Nulla facilisi.
+            `;
+
+            const blob = new Blob([reportText], { type: "text/plain" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "report.txt";
+            link.click();
+        }
+    </script>
+</body>
+
+</html>

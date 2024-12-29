@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Injury Prevention Training</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff; /* Light blue background */
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #0066cc;
+            text-align: center;
+        }
+
+        .module {
+            background-color: white;
+            border: 2px solid #0066cc;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .module h2 {
+            color: #00509e;
+        }
+
+        .progress {
+            height: 20px;
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #0066cc;
+            width: 0;
+            text-align: center;
+            color: white;
+            line-height: 20px;
+        }
+
+        .complete-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #00509e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .complete-btn:hover {
+            background-color: #003f7f;
+        }
+
+        .certificate-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .generate-btn {
+            background-color: #008080;
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .generate-btn:hover {
+            background-color: #005f5f;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 10px;
+            background-color: #00509e;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Employee Injury Prevention Training</h1>
+
+        <!-- Module 1: Equipment Handling -->
+        <div class="module">
+            <h2>Module 1: Equipment Handling</h2>
+            <p>Learn how to safely handle factory equipment to avoid injury.</p>
+            <div class="progress">
+                <div class="progress-bar" id="module1-progress-bar">0%</div>
+            </div>
+            <button class="complete-btn" onclick="completeModule('module1')">Complete Module</button>
+        </div>
+
+        <!-- Module 2: Ergonomic Safety -->
+        <div class="module">
+            <h2>Module 2: Ergonomic Safety</h2>
+            <p>Understand proper ergonomic practices to maintain body safety during work.</p>
+            <div class="progress">
+                <div class="progress-bar" id="module2-progress-bar">0%</div>
+            </div>
+            <button class="complete-btn" onclick="completeModule('module2')">Complete Module</button>
+        </div>
+
+        <!-- Module 3: Emergency Protocols -->
+        <div class="module">
+            <h2>Module 3: Emergency Protocols</h2>
+            <p>Learn the proper procedures during emergencies to ensure your safety and that of others.</p>
+            <div class="progress">
+                <div class="progress-bar" id="module3-progress-bar">0%</div>
+            </div>
+            <button class="complete-btn" onclick="completeModule('module3')">Complete Module</button>
+        </div>
+
+        <!-- Certificate Section -->
+        <div class="certificate-section">
+            <h2>All Modules Completed? Generate Your Certificate!</h2>
+            <button class="generate-btn" id="generate-certificate-btn" onclick="generateCertificate()" disabled>Download Certificate</button>
+        </div>
+    </div>
+
+    <footer>
+        © 2024 Injury Prevention Training Program
+    </footer>
+
+    <script>
+        let progress = {
+            module1: 0,
+            module2: 0,
+            module3: 0
+        };
+
+        function completeModule(module) {
+            progress[module] = 100; // Update progress to 100%
+
+            // Update progress bar in the UI
+            document.getElementById(`${module}-progress-bar`).style.width = '100%';
+            document.getElementById(`${module}-progress-bar`).innerText = '100%';
+
+            // Check if all modules are complete
+            if (progress.module1 === 100 && progress.module2 === 100 && progress.module3 === 100) {
+                document.getElementById('generate-certificate-btn').disabled = false; // Enable certificate button
+            }
+        }
+
+        function generateCertificate() {
+            alert("Congratulations! Your certificate has been generated.");
+            // Logic to generate the certificate (PDF generation or redirect to certificate download)
+        }
+    </script>
+</body>
+</html>
+ 

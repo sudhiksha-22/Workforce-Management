@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Request</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and container styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        .container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 270px;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            width: 250px;
+            height: 100vh;
+            background-color: #0E4AA0;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .navbar h2 {
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 30px;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+        }
+
+        .navbar ul li {
+            margin: 20px 0;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #0C3A7B;
+        }
+
+        /* Leave Request Form Styling */
+        .leave-request-form {
+            background-color: white;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 700px;
+            text-align: center;
+        }
+
+        .leave-request-form h2 {
+            margin-bottom: 30px;
+            color: #0E4AA0;
+            font-size: 28px;
+        }
+
+        .leave-request-form label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        .leave-request-form input[type="text"] {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            margin-bottom: 30px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        .leave-request-form input[type="submit"] {
+            background-color: #0E4AA0;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .leave-request-form input[type="submit"]:hover {
+            background-color: #0C3A7B;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <h2>Supervisor Dashboard</h2>
+        <nav>
+            <ul>
+                <li><a href="/allocate_work"><strong>Allocate Work</strong></a></li>
+                <li><a href="/current_shift_schedule"><strong>Current Shift Status</strong></a></li>
+                <li><a href="/generate_report"><strong>Generate Report</strong></a></li>
+                <li><a href="/key_metrics"><strong>Performance Metrics</strong></a></li>
+                <li><a href="/leave_approval"><strong>Leave Approval</strong></a></li>
+                <li><a href="/attendance_log"><strong>Attendance Log</strong></a></li>
+                <li><a href="/greivances"><strong>Grievances</strong></a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Leave Request Form Section -->
+    <div class="container">
+        <div class="leave-request-form">
+            <h2>Request Leave</h2>
+            <form action="/handle-leave-request" method="POST">
+                <label for="reason">Reason for Leave:</label>
+                <input type="text" id="reason" name="reason" required />
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

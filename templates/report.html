@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        h1,
+        h2 {
+            color: #040303;
+        }
+
+        h3 {
+            color: #999;
+        }
+
+        .btn {
+            background: #0e4aa0;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+        }
+
+        .btn:hover {
+            color: #f05462;
+            background: white;
+            padding: 3px 8px;
+            border: 2px solid #f05462;
+        }
+
+        .title {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 15px 10px;
+            border-bottom: 2px solid #999;
+        }
+
+        table {
+            padding: 10px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .side-menu {
+            position: fixed;
+            background: #0e4aa0;
+            width: 20vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .side-menu .brand-name {
+            height: 10vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #dc3442;
+        }
+
+        .side-menu li {
+            font-size: 24px;
+            padding: 10px 40px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        
+        .side-menu li:hover {
+            background: #f05462;
+            color:white;
+            padding: 8px 38px;
+            border-radius: 8px;
+            transistion: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        
+        .side-menu li{
+            color:white
+        }
+
+        .container {
+            position: absolute;
+            right: 0;
+            width: 80vw;
+            height: 100vh;
+            background: #f1f1f1;
+        }
+
+        .container .header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 80vw;
+            height: 10vh;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .container .header .nav {
+            width: 90%;
+            display: flex;
+            align-items: center;
+        }
+
+        .container .header .nav .search {
+            flex: 3;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container .header .nav .search input[type=text] {
+            border: none;
+            background: #f1f1f1;
+            padding: 10px;
+            width: 50%;
+        }
+
+        .container .header .nav .search button {
+            width: 40px;
+            height: 40px;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container .header .nav .search button img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .container .header .nav .user {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .container .header .nav .user img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .container .header .nav .user .img-case {
+            position: relative;
+            width: 50px;
+            height: 50px;
+        }
+
+        .container .header .nav .user .img-case img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .container .content {
+            position: relative;
+            margin-top: 10vh;
+            min-height: 90vh;
+            background: #f1f1f1;
+            padding: 20px;
+        }
+
+        .subheading {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .report-box {
+            width: 100%;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .report-box:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .report-box img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .report-content {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .report-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .report-category {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .report-subject {
+            color: #888;
+        }
+
+        .dropdown-icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-content {
+            display: none;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-top: 1px solid #ddd;
+            color: #333;
+        }
+
+        .report-box.expanded .dropdown-content {
+            display: block;
+        }
+
+        .report-box.expanded {
+            padding-bottom: 80px; /* Adjust based on the dropdown-content height */
+        }
+
+        .report-box.expanded .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        .report-box {
+            width: 100%;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .report-box:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .report-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Buttons styling */
+        .report-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .approve-btn {
+            background-color: green;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .approve-btn:hover {
+            background-color: darkgreen;
+        }
+
+        .feedback-btn {
+            background-color: blue;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .feedback-btn:hover {
+            background-color: darkblue;
+        }
+
+        /* Timestamp styling */
+        .report-timestamp {
+            font-size: 14px;
+            color: #888;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .report-content {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        .dropdown-content {
+            display: none;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-top: 1px solid #ddd;
+            color: #333;
+        }
+
+        .report-box.expanded .dropdown-content {
+            display: block;
+        }
+
+        .report-box.expanded {
+            padding-bottom: 80px; /* Adjust based on the dropdown-content height */
+        }
+
+        .report-box.expanded .dropdown-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="side-menu">
+        <div class="brand-name">
+            <h1>SYSYS CREW</h1>
+        </div>
+        <ul>
+            
+            <li><img src="dashboard (2).png" alt="">&nbsp;<span><a href="index.html">Dashboard</a></span> </li>
+            <li><img src="report1.png" alt="">&nbsp;<span><a href="">Work Allocation</a></span> </li>
+            <li><img src="teacher2.png" alt="">&nbsp;<span><a href="shift.html">Shift Status</a></span> </li>
+            <li><img src="report1.png" alt="">&nbsp;<span><a href="report.html">Report Analytics</a></span> </li>
+            <li><img src="report1.png" alt="">&nbsp;<span><a href="">Enroll/Terminate</a></span> </li>
+            <li><img src="reading-book (1).png" alt="">&nbsp;<span><a href="grievances.html">Grievances</a></span> </li>
+            <li><img src="reading-book (1).png" alt="">&nbsp;<span><a href="">Performance Metrics</a></span> </li>            
+            <li><img src="attend.png" alt="">&nbsp;<span><a href="">Attendance Log</a></span> </li>
+            <li><img src="payment.png" alt="">&nbsp;<span>Payroll/Profile</span> </li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div class="nav">
+                <div class="search">
+                    <input type="text" placeholder="Search..">
+                    <button type="submit"><img src="search.png" alt=""></button>
+                </div>
+                <div class="user">
+                    <a href="#" class="btn">Send Alert</a>
+                    <div class="img-case">
+                        <img src="user.png" alt="User Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2 class="subheading">Reports</h2>
+
+            <!-- Report Box 1 -->
+            <div class="report-box" onclick="toggleDropdown(this)">
+                <a href="report view.html?reportID=1" class="report-box">
+                <div class="report-content">
+                    <img src="user3.png" alt="Profile">
+                    <div class="report-details">
+                        <span class="report-category">Category: Financial</span>
+                        <span class="report-subject">Subject: Annual Revenue Report</span>
+                    </div>
+                </div>
+            </a>
+                
+                <div class="dropdown-content">
+                    This is a sample text 1 from AlienOmus (ANNUAL REVENUE).
+                </div>
+                <div class="report-timestamp">10:30 AM</div>
+            </div>
+
+            <!-- Report Box 2 -->
+            <div class="report-box" onclick="toggleDropdown(this)">
+                
+                <div class="report-content">
+                    <img src="user5.png" alt="Profile">
+                    <div class="report-details">
+                        <span class="report-category">Category: Operations</span>
+                        <span class="report-subject">Subject: Production Efficiency Report</span>
+                    </div>
+                </div>
+                
+                <div class="dropdown-content">
+                    This is a sample text 2 from AlienOmus (PRODUCTION EFFICIENCY REPORT).
+                </div>
+                <div class="report-timestamp">11:00 AM</div>
+            </div>
+
+            <!-- Report Box 3 -->
+            <div class="report-box" onclick="toggleDropdown(this)">
+                <div class="report-content">
+                    <img src="user.png" alt="Profile">
+                    <div class="report-details">
+                        <span class="report-category">Category: Human Resources</span>
+                        <span class="report-subject">Subject: Employee Satisfaction Survey</span>
+                    </div>
+                </div>
+                
+                <div class="dropdown-content">
+                    This is a sample text 1 from AlienOmus (EMPLOYEE SATISFACTION SURVEY).
+                </div>
+                <div class="report-timestamp">1:45 PM</div>
+            </div>
+
+            <!-- Report Box 4 -->
+            <div class="report-box" onclick="toggleDropdown(this)">
+                <div class="report-content">
+                    <img src="user 5.png" alt="Profile">
+                    <div class="report-details">
+                        <span class="report-category">Category: R&D</span>
+                        <span class="report-subject">Subject: Product Innovation Pipeline</span>
+                    </div>
+                </div>
+               
+                <div class="dropdown-content">
+                    This is a sample text 1 from AlienOmus (PRODUCT INNOVATION).
+                </div>
+                <div class="report-timestamp">2:15 PM</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDropdown(reportBox) {
+            reportBox.classList.toggle('expanded');
+        }
+    </script>
+</body>
+
+</html>

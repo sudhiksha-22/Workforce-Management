@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Supervisor View Complaints</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      height: 100vh;
+      display: flex;
+    }
+
+    /* Left-aligned Navbar */
+    .navbar {
+      background-color: #0E4AA0;
+      color: white;
+      width: 250px;
+      height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar h2 {
+      margin-bottom: 20px;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: white;
+      padding: 15px;
+      margin-bottom: 10px;
+      background-color: #0E4AA0;
+      border-radius: 4px;
+      display: block;
+    }
+
+    .navbar a:hover {
+      background-color: #0b3e7f;
+    }
+
+    /* Main Content Section */
+    .content {
+      flex-grow: 1;
+      padding: 40px;
+      background-color: white;
+      overflow-y: auto;
+    }
+
+    .container {
+      max-width: 100%;
+      margin: 20px 0;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .header h2 {
+      margin: 0;
+      color: #0E4AA0;
+    }
+
+    .header button {
+      padding: 10px 20px;
+      background-color: #0E4AA0;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .header button:hover {
+      background-color: #0b3e7f;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #ddd;
+    }
+
+    th,
+    td {
+      padding: 15px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    td button {
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    td button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <h2>Manager Dashboard</h2>
+    <a href="/manager_dashboard">Dashboard</a>
+    <a href="/profile">Profile</a>
+    <a href="/work_allocate">Work Allocation</a>
+    <a href="/current_shift_schedule">Shift Status</a>
+    <a href="/report">Report Analytics</a>
+    <a href="/view-compalint-manager">Grievances</a>
+    <a href="/m_key_metrics">Performance Metrics</a>
+    <a href="/manager_attendance">Attendance Log</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <div class="container">
+      <div class="header">
+        <h2>View Complaints</h2>
+        <button onclick="window.location.href='raise_complaint.html'">Raise a Complaint</button>
+      </div>
+
+      <table>
+        <tr>
+          <th>Employee Name</th>
+          <th>Complaint</th>
+          <th>Action</th>
+        </tr>
+        {% for employee, details in dict.items() %}
+        <tr>
+          <td>{{ employee }}</td>
+          <td>{{ details }}</td>
+          <td>
+            <!-- Button to review the complaint -->
+            <form action="/review-complaint-manager" method="POST">
+              <input type="hidden" name="username" value="{{ employee }}" />
+              <button type="submit" name="action" value="review">Review</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+
+</body>
+
+</html>

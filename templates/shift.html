@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shift Scheduling</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .side-menu {
+            position: fixed;
+            background: #0e4aa0;
+            width: 20vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .side-menu .brand-name {
+            height: 10vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #dc3442;
+        }
+
+        .side-menu li {
+            font-size: 24px;
+            padding: 10px 40px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .side-menu li:hover {
+            background: #f05462;
+            padding: 8px 38px;
+            border-radius: 8px;
+        }
+
+        .side-menu li a {
+            color: white;
+        }
+
+        .container {
+            position: absolute;
+            right: 0;
+            width: 80vw;
+            height: 100vh;
+            background: #f1f1f1;
+        }
+
+        .container .header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 80vw;
+            height: 10vh;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .container .header .nav {
+            width: 90%;
+            display: flex;
+            align-items: center;
+        }
+
+        .container .header .nav .search {
+            flex: 3;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container .header .nav .search input[type=text] {
+            border: none;
+            background: #f1f1f1;
+            padding: 10px;
+            width: 50%;
+        }
+
+        .container .header .nav .search button {
+            width: 40px;
+            height: 40px;
+            border: none;
+        }
+
+        .container .header .nav .user {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .container .header .nav .user img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .container .content {
+            position: relative;
+            margin-top: 10vh;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .shift-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .shift-table th, .shift-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .shift-table th {
+            background-color: #f4f4f4;
+        }
+
+        /*.shift-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }*/
+
+        .approve-btn {
+            background-color: green;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .approve-btn:hover {
+            background-color: darkgreen;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .close-btn {
+            background-color: red;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .save-btn {
+            background-color: blue;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .save-btn:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="side-menu">
+        <div class="brand-name">
+            <h1>SYSYS CREW</h1>
+        </div>
+        <ul>
+            <li><img src="dashboard (2).png" alt="">&nbsp;<span><a href="index.html">Dashboard</a></span> </li>
+            <li><img src="report1.png" alt="">&nbsp;<span><a href="">Work Allocation</a></span> </li>
+            <li><img src="teacher2.png" alt="">&nbsp;<span><a href="shift.html">Shift Status</a></span> </li>
+            <li><img src="report1.png" alt="">&nbsp;<span><a href="report.html">Report Analytics</a></span> </li>
+            <li><img src="report1.png" alt="">&nbsp;<span><a href="">Enroll/Terminate</a></span> </li>
+            <li><img src="reading-book (1).png" alt="">&nbsp;<span><a href="grievances.html">Grievances</a></span> </li>
+            <li><img src="reading-book (1).png" alt="">&nbsp;<span><a href="">Performance Metrics</a></span> </li>            
+            <li><img src="attend.png" alt="">&nbsp;<span><a href="">Attendance Log</a></span> </li>
+            <li><img src="payment.png" alt="">&nbsp;<span>Payroll/Profile</span> </li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="nav">
+                <div class="search">
+                    <input type="text" placeholder="Search..">
+                </div>
+                <div class="user">
+                    <button class="btn">Send Alert</button>
+                    <img src="user.png" alt="User Image">
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2>Shift Scheduling</h2>
+            <table class="shift-table">
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Employee Name</th>
+                        <th>KPM</th>
+                        <th>Shift</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>12345</td>
+                        <td>Srinivas</td>
+                        <td>85%</td>
+                        <td>Morning</td>
+                        <td class="shift-actions">
+                            <!-- <button class="approve-btn">Approve</button> -->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>67890</td>
+                        <td>Yuthika</td>
+                        <td>92%</td>
+                        <td>Evening</td>
+                        <td class="shift-actions">
+                            <!-- <button class="approve-btn">Approve</button> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <h3>Edit Shift</h3>
+            <input type="text" id="shiftInput" placeholder="Enter new shift">
+            <div class="modal-actions">
+                <button class="save-btn" onclick="saveShift()">Save</button>
+                <button class="close-btn" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('editModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        function saveShift() {
+            // Implement logic to save the edited shift
+            closeModal();
+        }
+    </script>
+</body>
+</html>

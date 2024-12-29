@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mail Credential Allocation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #3b82f6, #ffffff);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        h2 {
+            text-align: center;
+            color: #3b82f6;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+        button {
+            padding: 10px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #2563eb;
+        }
+        .mailto-link {
+            margin-top: 10px;
+            display: none;
+            text-align: center;
+        }
+        .mailto-link a {
+            color: #2563eb;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Allocate Credentials</h2>
+        <form id="credentialForm">
+            <label for="inputEmail">Input Email:</label>
+            <input type="email" id="inputEmail" placeholder="Enter recipient's email" required>
+
+            <button type="submit">Generate Credentials and Send Email</button>
+        </form>
+
+        <div class="mailto-link" id="mailtoLink">
+            <p>Email Generated! Click below to send it:</p>
+            <a href="#" id="mailtoAnchor">Send Email</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('credentialForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const recipientEmail = document.getElementById('inputEmail').value;
+            const generatedUsername = 'Srinivas';
+            const generatedPassword = '1234';
+
+            // Subject and body of the email
+            const emailSubject = 'Your Username and Credentials';
+            const emailBody = `Dear User,\n\nYour account has been created successfully.\n\nUsername: ${generatedUsername}\nPassword: ${generatedPassword}\n\nThank you!`;
+
+            // Creating the mailto link
+            const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+
+            // Setting the href attribute of the anchor tag
+            const mailtoAnchor = document.getElementById('mailtoAnchor');
+            mailtoAnchor.setAttribute('href', mailtoLink);
+
+            // Making the mailto link visible
+            document.getElementById('mailtoLink').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

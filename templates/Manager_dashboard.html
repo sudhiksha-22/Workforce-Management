@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        h1,
+        h2 {
+            color: #040303;
+        }
+
+        h3 {
+            color: #999;
+        }
+
+        .btn {
+            background: #3b8ff3;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+        }
+
+        .btn:hover {
+            color: #f05462;
+            background: white;
+            padding: 3px 8px;
+            border: 2px solid #f05462;
+        }
+
+        .title {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 15px 10px;
+            border-bottom: 2px solid #999;
+        }
+
+        table {
+            padding: 10px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .side-menu {
+            position: fixed;
+            background: #0e4aa0;
+            width: 20vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .side-menu .brand-name {
+            height: 10vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color:#dc3442
+        }
+
+        .side-menu li {
+            font-size: 24px;
+            padding: 10px 40px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .side-menu li:hover {
+            background: #f05462;
+            color:white;
+            padding: 8px 38px;
+            border-radius: 8px;
+            transistion: background-color 0.3s ease, color 0.3s ease;
+        }
+        .side-menu li{
+            color:white
+        }
+
+        .container {
+            position: absolute;
+            right: 0;
+            width: 80vw;
+            height: 100vh;
+            background: #f1f1f1;
+        }
+
+        .container .header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 80vw;
+            height: 10vh;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .side-menu ul li span,
+        .side-menu ul li a{
+            color: white
+        }
+
+        
+
+        .container .header .nav {
+            width: 90%;
+            display: flex;
+            align-items: center;
+        }
+
+        .container .header .nav .search {
+            flex: 3;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container .header .nav .search input[type=text] {
+            border: none;
+            background: #f1f1f1;
+            padding: 10px;
+            width: 50%;
+        }
+
+        .container .header .nav .search button {
+            width: 40px;
+            height: 40px;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container .header .nav .search button img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .container .header .nav .user {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .container .header .nav .user img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .container .header .nav .user .img-case {
+            position: relative;
+            width: 50px;
+            height: 50px;
+        }
+
+        .container .header .nav .user .img-case img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .container .content {
+            position: relative;
+            margin-top: 10vh;
+            min-height: 90vh;
+            background: #f1f1f1;
+        }
+
+        .container .content .cards {
+            padding: 20px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .container .content .cards .card {
+            width: 30%;
+            height: 150px;
+            background: white;
+            margin: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        
+        .container .content .cards .card img {
+            max-width: 60px; /* Adjust this as per your requirement */
+            max-height: 60px;
+        }
+        
+        .container .content .cards .card h3 {
+            margin-top: auto; /* Push the heading to the bottom */
+            text-align: center;
+            width: 100%;
+            color:#f05462
+        }
+        
+        
+
+        .container .content .content-2 {
+            min-height: 60vh;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .container .content .content-2 .recent-payments {
+            min-height: 50vh;
+            flex: 3;
+            background: white;
+            margin: 0 25px 25px 25px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container .content .content-2 .new-students {
+            flex: 2;
+            background: white;
+            min-height: 50vh;
+            margin: 0 25px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container .content .content-2 .new-students table td:nth-child(1) img {
+            height: 40px;
+            width: 40px;
+        }
+
+        .btn {
+            background: #0e4aa0;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            transition: transform 0.2s ease-in-out, background-color 0.3s ease; /* Add transition for smooth hover */
+        }
+    
+        .btn:hover {
+            color: #f05462;
+            background: white;
+            padding: 3px 8px;
+            border: 2px solid #f05462;
+            transform: scale(1.15); /* Slightly enlarge the button on hover */
+        }
+
+        @media screen and (max-width: 1050px) {
+            .side-menu li {
+                font-size: 18px;
+            }
+        }
+
+        @media screen and (max-width: 940px) {
+            .side-menu li span {
+                display: none;
+            }
+
+            .side-menu {
+                align-items: center;
+            }
+
+            .side-menu li img {
+                width: 30px;
+                height: 30px;
+                object-fit: cover;
+            }
+            .side-menu li {
+                font-size: 24px;
+                padding: 10px 40px;
+                color: white;
+                display: flex;
+                align-items: center;
+                gap: 10px; /* Add spacing between icon and text */
+            }
+
+            /*.side-menu li:hover {
+                background: #dc3442;
+                padding: 8px 38px;
+                border: 2px solid white;
+            }*/
+        }
+
+        @media screen and (max-width: 536px) {
+            .brand-name h1 {
+                font-size: 16px;
+            }
+
+            .container .content .cards {
+                justify-content: center;
+            }
+
+            .side-menu li img {
+                width: 30px;
+                height: 30px;
+            }
+
+            .container .content .content-2 .recent-payments table th:nth-child(2),
+            .container .content .content-2 .recent-payments table td:nth-child(2) {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="side-menu">
+        <div class="brand-name">
+            <h1>SYSYS CREW</h1>
+        </div>
+        <ul>
+             
+            <li><a href="/manager_dashboard">Dashboard</a></span> </li>
+            <li><a href="/profile">Profile</span> </li>
+            <li><a href="/work_allocate">Work Allocation</a></span> </li>
+            <li><a href="/current_shift_schedule">Shift Status</a></span> </li>
+            <li><a href="/report">Report Analytics</a></span> </li>
+            <li><a href="/enroll_terminate">Enroll Employee</a></span> </li>
+            <li><a href="/view-compalint-manager">Grievances</a></span> </li>
+            <li><a href="/m_key_metrics">Performance Metrics</a></span> </li>            
+            <li><a href="/manager_com_att">Attendance Log</a></span> </li>
+
+
+        </ul>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div class="nav">
+                <div class="search">
+                    <input type="text" placeholder="Search..">
+                    <button type="submit"><img src="./static/search.png" alt=""></button>
+                </div>
+                <div class="user">
+                    <a href="#" class="btn">Send Alert</a>
+                    <!-- <img src="notifications.png" alt=""> -->
+                    <p>{{username}}</p>
+                    <div class="img-case">
+                        
+                        <img src="./static/user.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="cards">
+                <div class="card">
+                    <h1>2000</h1>
+                    <img src="./static/task.png" alt="">
+                    <h3>Completed Orders</h3>
+                </div>
+                <div class="card">
+                    <h1>1360</h1>
+                    <img src="./static/worker.png" alt="">
+                    <h3>Total Employees</h3>
+                </div>
+                <div class="card">
+                    <h1>35</h1>
+                    <img src="./static/pending.png" alt="">
+                    <h3>Pending Orders</h3>
+                </div>
+                <!--<div class="card">
+                    <h1>15</h1>
+                    <h3>Branch</h3>
+                </div> -->
+            </div>
+
+            <div class="content-2">
+                <div class="recent-payments">
+                    <div class="title">
+                        <h2>Top Performers</h2>
+                        <a href="#" class="btn">View All</a>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Dept</th>
+                            <th>Avg. Time Spent</th>
+                            <th>Tasks Completed</th>
+                        </tr>
+                        <tr>
+                            <td>Srinivas</td>
+                            <td>Assembly</td>
+                            <td>37 Hrs: 52 Min</td>
+                            <td>5000</td>
+                            <!--<td><span class="btn">Pending</span></td> -->
+                        </tr>
+                        <tr>
+                            <td>Yuthika</td>
+                            <td>quality management</td>
+                            <td>37 Hrs: 12 Min</td>
+                            <td>5000</td>
+                            <!-- <td><span class="btn">Pending</span></td> -->
+                        </tr>
+                        <tr>
+                            <td>Sudhiksha</td>
+                            <td>packaging</td>
+                            <td>30 Hrs: 59 Min</td>
+                            <td>5000</td>
+                            <!-- <td><span class="btn">Pending</span></td> -->
+                        </tr>
+                    </table>
+                </div>
+
+                <!--<div class="new-students">
+                    <div class="title">
+                        <h2>Alerts</h2>
+                        <a href="#" class="btn">View All</a>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                        </tr>
+                        <tr>
+                            <td><img src="user3.png" alt=""></td>
+                            <td>Machine 12 defect</td>
+                        </tr>
+                        <tr>
+                            <td><img src="user.png" alt=""></td>
+                            <td>Prodcution line fault</td>
+                        </tr>
+                        <tr>
+                            <td><img src="user4.png" alt=""></td>
+                            <td>PLC damage</td>
+                        </tr>
+                    </table>
+                </div> -->
+
+                <div class="plot-graph"></div>
+                <!--    <div class="title">
+                        <h2>Performance Overview</h2>
+                    </div>  -->
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- <script>
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        const performanceChart = new Chart(ctx, {
+            type: 'bar', // You can also use 'line', 'pie', etc.
+            data: {
+                labels: ['Completed Orders', 'Total Employees', 'Pending Orders'], // X-axis labels
+                datasets: [{
+                    label: 'Performance Metrics',
+                    data: [2000, 1360, 35], // Data values for each label
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script> -->
+
+    <script>
+        // Chart.js initialization
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        const performanceChart = new Chart(ctx, {
+            type: 'line', // You can change the chart type to 'bar', 'line', 'pie', etc.
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'], // X-axis labels
+                datasets: [{
+                    label: 'Attendance',
+                    data: [65, 59, 80, 81, 56, 55, 40], // Attendance data
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Task Completion',
+                    data: [75, 69, 90, 91, 66, 65, 50], // Task completion data
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+
+
+
+
+         
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Review Complaint</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            height: 100vh;
+            display: flex;
+          }
+          /* Main Content Section */
+      .content {
+        flex-grow: 1;
+        padding: 40px;
+        background-color: white;
+        overflow-y: auto;
+      }
+
+      .container {
+        max-width: 100%;
+        margin: 0 auto;
+      }
+
+      .complaint-details,
+      .feedback-section {
+        margin-bottom: 40px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h2,
+      h3 {
+        color: #0e4aa0;
+      }
+
+      .complaint-details p {
+        color: #333;
+        line-height: 1.6;
+      }
+
+      textarea {
+        width: 100%;
+        height: 120px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        font-family: inherit;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <div class="content">
+    <div class="container">
+      <h2>Complaint Review</h2>
+
+      <div class="complaint-details">
+        <h3>Complaint Details:</h3>
+        <p>{{complaint_description}}</p>
+      </div>
+
+      <div class="feedback-section">
+        <h3>Supervisor Feedback:</h3>
+        <textarea placeholder="Enter your feedback here..."></textarea>
+        <button type="submit">Submit Feedback</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

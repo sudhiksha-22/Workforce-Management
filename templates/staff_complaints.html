@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Raise Complaint</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        color: #004080;
+      }
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 200px;
+        background-color: #004080; /* Dark Blue */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+      }
+
+      .sidebar ul {
+          list-style-type: none;
+          padding: 0;
+          margin: 0;
+          text-align: center;
+          width: 100%;
+      }
+
+      .sidebar ul li {
+          padding: 20px;
+      }
+
+      .sidebar ul li a {
+          text-decoration: none;
+          color: white;
+          font-size: 18px;
+          display: block;
+      }
+
+      .sidebar ul li a:hover {
+          background-color: #003366; /* Slightly darker blue for hover */
+      }
+      
+      label {
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      input[type="submit"] {
+        background-color: #004080;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #003366;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <nav>
+          <ul>
+              <li><a href="/staff_dashboard"><strong>Dashboard</strong></a></li>
+              <li><a href="/profile">Profile</a></li>
+              <li><a href="/staff-leave-request">Leave Request</a></li>
+              <li><a href="/staff_attendance">Attendance Log</a></li>
+              <li><a href="/e_key_metrics">Performance Matrix</a></li>
+              <li><a href="/staff-shift-change">Request Shift Change</a></li>
+              <li><a href="/view_leave_status ">View leave status</a></li>
+              <li><a href="/shift_history">Shift History</a></li>
+              <li><a href="/certificate">Injury Prevention Training</a></li>
+            </ul>
+      </nav>
+    </div>
+
+    <div class="container">
+      <h2>Raise a Complaint</h2>
+
+      <form action="/staff-handle-complaints" method="POST">
+        <label for="complaint-type">Complaint Type:</label>
+        <select id="complaint-type">
+          <option value="machine">Machine</option>
+          <option value="employee">Employee</option>
+          <option value="personal">Personal</option>
+        </select>
+        <input type="text" id="Complaint" name="Complaint" required />
+
+        <label for="to_whom">Raise Complaint to:</label>
+        <select id="to_whom" name="to_whom" required>
+          <option value="">--Select--</option>
+          <option value="supervisor">Supervisor</option>
+          <option value="manager">Manager</option>
+        </select>
+        <label for="complaint-details">Your Complaint:</label>
+        <textarea
+          id="complaint-details"
+          name="complaint-details"
+          placeholder="Enter your complaint here..."
+        ></textarea>
+
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+  </body>
+</html>

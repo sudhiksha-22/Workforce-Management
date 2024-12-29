@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request Shift Change</title>
+  <style>
+    /* Body and General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    /* Navbar Styles */        
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 200px;
+      background-color: #004080; /* Dark Blue */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .sidebar ul li {
+        padding: 20px;
+    }
+
+    .sidebar ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+        display: block;
+    }
+
+    .sidebar ul li a:hover {
+        background-color: #003366; /* Slightly darker blue for hover */
+    }
+
+    /* Main Content */
+    .main {
+      margin-left: 250px;
+      width: calc(100% - 250px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 70%;
+      max-width: 800px;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #0E4AA0;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      text-align: center;
+      border-bottom: 2px solid #0E4AA0;
+      padding-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      color: #333;
+      font-weight: bold;
+      margin-top: 20px;
+      font-size: 1rem;
+    }
+
+    textarea,
+    select,
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f8f8f8;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    textarea:focus,
+    select:focus,
+    input[type="text"]:focus,
+    input[type="email"]:focus {
+      border-color: #004080;
+      outline: none;
+      background-color: #fff;
+    }
+
+    button {
+      width: 50%;
+      padding: 12px 0;
+      background-color: #004080;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #003366;
+    }
+
+    /* Success Message */
+    .success-message {
+      color: white;
+      background-color: #0E4AA0;
+      padding: 10px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+
+    /* Calendar */
+    .calendar {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .calendar th,
+    .calendar td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .calendar .absent {
+      background-color: red;
+      color: white;
+    }
+
+    /* Flash Messages */
+    .flash-message {
+      color: white;
+      font-weight: bold;
+      background-color: #0E4AA0;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .navbar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .main {
+        margin-left: 0;
+      }
+
+      .container {
+        width: 90%;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+    <!-- Navbar Section -->
+    <div class="sidebar">
+      <nav>
+          <ul>
+              <li><a href="/staff_dashboard"><strong>Dashboard</strong></a></li>
+              <li><a href="/profile">Profile</a></li>
+              <li><a href="/staff-leave-request">Leave Request</a></li>
+              <li><a href="/staff_attendance">Attendance Log</a></li>
+              <li><a href="/e_key_metrics">Performance Matrix</a></li>
+              <li><a href="/staff-raise-complaints">Raise Complaint</a></li>
+              <li><a href="/view_leave_status ">View leave status</a></li>
+              <li><a href="/shift_history">Shift History</a></li>
+              <li><a href="/certificate">Injury Prevention Training</a></li>
+            </ul>
+      </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <div class="container">
+      <h2>Request Shift Change</h2>
+      <form method="POST" action="{{ url_for('shift_change_request') }}">
+        <label for="reason">Reason for Shift Change:</label>
+        <textarea id="reason" name="reason" required rows="5" placeholder="Enter your reason here..."></textarea>
+
+        <label for="shift">Preferred Shift:</label>
+        <select id="shift" name="shift" required>
+          <option value="">-- Select a Shift --</option>
+          <option value="morning">Morning</option>
+          <option value="night">Night</option>
+        </select>
+
+        <button type="submit">Submit Request</button>
+      </form>
+
+      <!-- Example Success Message -->
+      <!-- <div class="success-message">Your request has been submitted successfully!</div> -->
+    </div>
+  </div>
+</body>
+
+</html>

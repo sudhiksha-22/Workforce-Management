@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Success</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #f4f4f4, #e2e2e2);
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      /* Full height of the viewport */
+      margin: 0;
+      text-align: center;
+    }
+
+    .message-box {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      /* Limit the width */
+      width: 100%;
+      transition: transform 0.3s ease;
+    }
+
+    .message-box:hover {
+      transform: translateY(-5px);
+      /* Subtle lift on hover */
+    }
+
+    h2 {
+      color: #0E4AA0;
+      margin-bottom: 15px;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    p {
+      font-size: 16px;
+      margin-top: 10px;
+      color: #555;
+    }
+
+    .redirect-message {
+      font-style: italic;
+      color: #888;
+    }
+  </style>
+  <script>
+    // Redirect after 5 seconds
+    setTimeout(function () {
+      window.location.href = "{{ url_for('staff_dashboard') }}"; // Redirect to the 'home' route
+    }, 5000);
+  </script>
+</head>
+
+<body>
+  <div class="message-box">
+    <h2>
+      {{username}} YOUR COMPLAINT HAS BEEN SUBMITTED TO {{person}} SUCCESSFULLY!!
+    </h2>
+    <p class="redirect-message">You will be redirected to the homepage in 5 seconds...</p>
+  </div>
+</body>
+
+</html>

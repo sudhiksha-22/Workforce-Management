@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Performance Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .navbar {
+            width: 250px;
+            height: 100vh;
+            background-color: #0E4AA0;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .navbar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .navbar nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .navbar nav ul li {
+            margin: 15px 0;
+        }
+
+        .navbar nav ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .navbar nav ul li a:hover {
+            background-color: #0C3A7B;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0C3A7B;
+            color: white;
+        }
+
+        textarea {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-right: 10px;
+            float: right;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <h2>Supervisor Dashboard</h2>
+        <nav>
+            <ul>
+                <li><a href="/allocate_work">Allocate Work</a></li>
+                <li><a href="/current_shift_schedule">Current Shift Status</a></li>
+                <li><a href="/generate_report">Generate Report</a></li>
+                <li><a href="/key_metrics">Performance Metrics</a></li>
+                <li><a href="/leave_approval">Leave Approval</a></li>
+                <li><a href="/attendance_log">Attendance Log</a></li>
+                <li><a href="/greivances">Grievances</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="container">
+        <h2>Employee Performance Report</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Employee Name</th>
+                    <th>Role</th>
+                    <th>Tasks Completed (Completed/Total)</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody id="employee-data">
+                {% for employee in employees %}
+                <tr>
+                    <td>{{ employee.id }}</td>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.phase }}</td> <!-- Role (Phase) Column -->
+                    <td>{{ employee.tasks_completed }}/{{ employee.total_tasks }}</td> <!-- Completed/Total Tasks -->
+                    <td><input type="text" placeholder=""></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+
+
+        </table>
+
+        <h3>Supervisor Comments:</h3>
+        <textarea id="supervisor-comments" placeholder="Enter general comments here..."></textarea>
+
+        <!-- Download button -->
+        <button type="button" id="download-report">Download Report</button>
+    </div>
+
+    <script>
+        document.getElementById('download-report').addEventListener('click', function () {
+            // Get table data
+            const tableRows = document.querySelectorAll('#employee-data tr');
+            let reportContent = 'Employee Performance Report\n\n';
+            reportContent += 'Employee ID, Employee Name, Role (Phase), Tasks Completed (Completed/Total), Remarks\n';
+
+            // Loop through the table rows
+            tableRows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                const rowData = Array.from(cells).map(cell => cell.innerText).join(', ');
+                const remarksInput = row.querySelector('input').value;
+                reportContent += `${rowData}, ${remarksInput}\n`;
+            });
+
+            // Add supervisor comments
+            const comments = document.getElementById('supervisor-comments').value;
+            reportContent += '\nSupervisor Comments:\n' + comments;
+
+            // Create a Blob and trigger download
+            const blob = new Blob([reportContent], { type: 'text/plain' });
+            const downloadLink = document.createElement('a');
+            downloadLink.href = URL.createObjectURL(blob);
+            downloadLink.download = 'employee_performance_report.txt';
+            downloadLink.click();
+        });
+    </script>
+
+</body>
+
+</html>

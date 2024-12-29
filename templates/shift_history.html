@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srinivas's Shift History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 200px;
+            background-color: #004080;
+            padding: 20px;
+            height: 100vh;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .sidebar ul li {
+            padding: 20px;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: block;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #003366;
+        }
+
+        /* Main content */
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #0E4AA0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #0E4AA0;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <ul>
+            <li><a href="/staff_dashboard"><strong>Dashboard</strong></a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/staff-leave-request">Leave Request</a></li>
+            <li><a href="/staff_attendance">Attendance Log</a></li>
+            <li><a href="/e_key_metrics">Performance Matrix</a></li>
+            <li><a href="/staff-raise-complaints">Raise Complaint</a></li>
+            <li><a href="/staff-shift-change">Request Shift Change</a></li>
+            <li><a href="/view_leave_status">View Leave Status</a></li>
+            <li><a href="/certificate">Injury Prevention Training</a></li>
+        </ul>
+    </div>
+
+    <!-- Main content (Srinivasan's Shift History) -->
+    <div class="content">
+        <h2>Srinivas's Shift History</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Shift Type</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Day shifts for the first week -->
+                <tr>
+                    <td>2024-09-01</td>
+                    <td>Day</td>
+                    <td>Completed</td>
+                </tr>
+                <tr>
+                    <td>2024-09-02</td>
+                    <td>Day</td>
+                    <td>Completed</td>
+                </tr>
+                <tr>
+                    <td>2024-09-03</td>
+                    <td>Day</td>
+                    <td>Missed</td>
+                </tr>
+                <tr>
+                    <td>2024-09-04</td>
+                    <td>Day</td>
+                    <td>Completed</td>
+                </tr>
+                <tr>
+                    <td>2024-09-05</td>
+                    <td>Day</td>
+                    <td>Completed</td>
+                </tr>
+                <tr>
+                    <td>2024-09-06</td>
+                    <td>Day</td>
+                    <td>Completed</td>
+                </tr>
+                <tr>
+                    <td>2024-09-07</td>
+                    <td>Day</td>
+                    <td>Missed</td>
+                </tr>
+
+                <!-- Night shifts for the second week -->
+                <tr>
+                    <td>2024-09-08</td>
+                    <td>Night</td>
+                    <td>Completed</td>
+                </tr>
+                <tr>
+                    <td>2024-09-09</td>
+                    <td>Night</td>
+                    <td>Missed</td>
+                </tr>
+                <tr>
+                    <td>2024-09-10</td>
+                    <td>Night</td>
+                    <td>Completed</td>
+                </tr>
+                <tr>
+                    <td>2024-09-11</td>
+                    <td>Night</td>
+                    <td>Completed</td>
+                </tr>
+                <tr>
+                    <td>2024-09-12</td>
+                    <td>Night</td>
+                    <td>Missed</td>
+                </tr>
+                <tr>
+                    <td>2024-09-13</td>
+                    <td>Night</td>
+                    <td>Completed</td>
+                </tr>
+                <tr>
+                    <td>2024-09-14</td>
+                    <td>Night</td>
+                    <td>Completed</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>

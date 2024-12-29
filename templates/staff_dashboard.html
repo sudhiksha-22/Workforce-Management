@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Staff Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        display: flex;
+        justify-content: flex-end;
+        padding: 10px;
+        background-color: white;
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+      }
+
+      .user-initial-circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #004080; /* Dark Blue */
+        color: white;
+        text-align: center;
+        line-height: 50px;
+        font-size: 24px;
+        margin-right: 10px;
+      }
+
+      #user-email {
+        font-size: 16px;
+        margin: 0;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 200px;
+        background-color: #004080; /* Dark Blue */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+      }
+
+      .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        width: 100%;
+      }
+
+      .sidebar ul li {
+        padding: 20px;
+      }
+
+      .sidebar ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+        display: block;
+      }
+
+      .sidebar ul li a:hover {
+        background-color: #003366; /* Slightly darker blue for hover */
+      }
+
+      main {
+        margin-left: 220px; /* Adjust according to sidebar width */
+        padding: 20px;
+      }
+
+      .leave-status {
+        margin-top: 20px;
+      }
+
+      .leave-status p {
+        font-size: 18px;
+        color: #004080; /* Dark Blue */
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      table th,
+      table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      table th {
+        background-color: #004080;
+        color: white;
+      }
+
+      .complete-btn {
+        margin-top: 20px;
+        background-color: #004080;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+      }
+
+      .complete-btn:hover {
+        background-color: #003366;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="user-info">
+        <div class="user-initial-circle">{{ username[0] }}</div>
+        <p id="user-email">{{ username }}</p>
+      </div>
+    </header>
+
+    <div class="sidebar">
+      <ul>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/staff-leave-request">Leave Request</a></li>
+        <li><a href="/staff_attendance">Attendance Log</a></li>
+        <li><a href="/e_key_metrics">Performance Matrix</a></li>
+        <li><a href="/staff-raise-complaints">Raise Complaint</a></li>
+        <li><a href="/staff-shift-change">Request Shift Change</a></li>
+        <li><a href="/view_leave_status ">View leave status</a></li>
+        <li><a href="/shift_history">Shift History</a></li>
+        <li><a href="/certificate">Injury Prevention Training</a></li>
+      </ul>
+    </div>
+
+    <main>
+      <h2>Welcome, {{ username }}</h2>
+
+      <!-- Srinivas' Task Dashboard -->
+      <div class="container">
+        <h2>Srinivas' Task Dashboard</h2>
+
+        <!-- Table to display tasks -->
+        <form method="POST" action="{{ url_for('staff_dashboard') }}">
+          <table>
+            <thead>
+              <tr>
+                <th>Task ID</th>
+                <th>Task Description</th>
+                <th>Status</th>
+                <th>Units Done</th>
+                <th>Barcode</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for task in tasks %}
+              <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.description }}</td>
+                <td>
+                  <input
+                    type="checkbox"
+                    id="checkbox-{{ task.id }}"
+                    name="completed_tasks"
+                    value="{{ task.id }}"
+                    onchange="toggleTaskDetails('{{ task.id }}')"
+                  />
+                  Completed
+                </td>
+                <td colspan="2">
+                  <div id="details-{{ task.id }}" class="hidden">
+                    <input
+                      type="number"
+                      name="units_done_{{ task.id }}"
+                      placeholder="Units done"
+                      min="1"
+                    />
+                    <input
+                      type="text"
+                      name="barcode_{{ task.id }}"
+                      placeholder="Barcode"
+                    />
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <button type="submit" class="complete-btn">
+            Submit Completed Tasks
+          </button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
