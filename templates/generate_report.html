@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Report</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* General Body Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            width: 250px;
+            height: 100vh;
+            background-color: #0E4AA0;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+        }
+
+        .navbar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .navbar nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .navbar nav ul li {
+            margin: 15px 0;
+        }
+
+        .navbar nav ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .navbar nav ul li a:hover {
+            background-color: #0C3A7B;
+        }
+
+        /* Container Styles */
+        .container {
+            margin-left: 270px;
+            /* Space for the fixed navbar */
+            padding: 20px;
+        }
+
+        .container h3 {
+            margin-bottom: 20px;
+        }
+
+        /* Form Styles */
+        form {
+            margin-bottom: 20px;
+        }
+
+        form label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        form input,
+        form select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        form button {
+            background-color: #0E4AA0;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #0C3A7B;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #0E4AA0;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Metrics Styles */
+        .metrics {
+            display: flex;
+            gap: 20px;
+        }
+
+        .metric {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            text-align: center;
+        }
+
+        .metric h4 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <h2>Supervisor Dashboard</h2>
+        <nav>
+            <ul>
+                <li><a href="/profile">
+                        <strong>Profile</strong>
+                    </a></li>
+                <li><a href="/supervisor_schedule">
+                        <strong>Work Schedule</strong>
+                    </a></li>
+                <li><a href="/allocate_work">
+                        <strong>Allocate Work</strong>
+                    </a></li>
+                <li><a href="/current_shift_schedule">
+                        <strong>Current Shift Status</strong>
+                    </a></li>
+                <li><a href="/generate_report">
+                        <strong>Staff remarks</strong>
+                    </a></li>
+                <li><a href="/key_metrics">
+                        <strong>Performance metrics</strong>
+                    </a></li>
+                <li><a href="/view-leave-request">
+                        <strong>Leave Approval</strong>
+                    </a></li>
+                <li><a href="/supervisor_com_att">
+                        <strong>Attendance Log</strong>
+                    </a></li>
+                <li><a href="/view-complaint-supervisor">
+                        <strong>Grievances</strong>
+                    </a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container">

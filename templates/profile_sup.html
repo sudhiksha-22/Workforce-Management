@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        /* Resetting default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            width: 250px;
+            height: 100vh;
+            background-color: #0E4AA0;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .navbar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            margin: 20px 0;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+            border-radius: 5px;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #0C3A7B;
+        }
+
+        /* Container Styling */
+        .container {
+            flex-grow: 1;
+            margin-left: 270px;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .profile-container {
+            max-width: 500px;
+            width: 100%;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #0E4AA0;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        /* Profile Data Section */
+        .profile-data {
+            margin-top: 20px;
+        }
+
+        .profile-data div {
+            margin-bottom: 20px;
+        }
+
+        .profile-data label {
+            font-weight: bold;
+            color: #666;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .profile-data span {
+            font-size: 16px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* Button for future actions (if needed) */
+        .profile-data button {
+            background-color: #0E4AA0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .profile-data button:hover {
+            background-color: #0C3A7B;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <h2>Supervisor Dashboard</h2>
+        <nav>
+            <ul>
+                <li><a href="/allocate_work"><strong>Allocate Work</strong></a></li>
+                <li><a href="/current_shift_schedule"><strong>Current Shift Status</strong></a></li>
+                <li><a href="/generate_report"><strong>Generate Report</strong></a></li>
+                <li><a href="/key_metrics"><strong>Performance Metrics</strong></a></li>
+                <li><a href="/leave_approval"><strong>Leave Approval</strong></a></li>
+                <li><a href="/supervisor_com_att"><strong>Attendance Log</strong></a></li>
+                <li><a href="/greivances"><strong>Grievances</strong></a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Profile Content Section -->
+    <div class="container">
+        <div class="profile-container">
+            <h1>{{ user.username }}'s Profile</h1>
+            <div class="profile-data">
+                <div>
+                    <label>Role:</label>
+                    <span>{{ user.role }}</span>
+                </div>
+                <div>
+                    <label>Phone Number:</label>
+                    <span>{{ user.phone_number }}</span>
+                </div>
+                <div>
+                    <label>Address:</label>
+                    <span>{{ user.address_area }}</span>
+                </div>
+                <div>
+                    <label>Age:</label>
+                    <span>{{ user.age }}</span>
+                </div>
+                <div>
+                    <label>Gender:</label>
+                    <span>{{ user.gender }}</span>
+                </div>
+                <div>
+                    <label>Aadhaar/PAN Number:</label>
+                    <span>{{ user.aadhaar_pan }}</span>
+                </div>
+                <div>
+                    <label>Payroll</label>
+                    <span>45,000</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supervisor Work Schedule</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Sidebar (navbar) */
+        .navbar {
+            background-color: #0E4AA0;
+            color: white;
+            width: 250px;
+            height: 100vh;
+            padding: 20px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar h2 {
+            margin-bottom: 20px;
+            color: #f4f4f4;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #0E4AA0;
+            border-radius: 4px;
+            display: block;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            background-color: #0b3e7f;
+        }
+
+        .navbar p {
+            color: white;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        /* Main content container */
+        .container {
+            margin-left: 300px;
+            /* Adjusted to align properly */
+            width: 60%;
+            /* Smaller width for a compact look */
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #0E4AA0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0E4AA0;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Sidebar (Navbar) -->
+    <div class="navbar">
+        <h2>Supervisor Dashboard</h2>
+
+        <a href="/profile">
+            <strong>Profile</strong>
+        </a>
+
+        <a href="/supervisor_schedule">
+            <strong>Work Schedule</strong>
+        </a>
+
+        <a href="/allocate_work">
+            <strong>Allocate Work</strong>
+        </a>
+
+        <a href="/current_shift_schedule">
+            <strong>Current Shift Status</strong>
+        </a>
+
+        <a href="/generate_report">
+            <strong>Staff remarks</strong>
+        </a>
+
+        <a href="/key_metrics">
+            <strong>Performance metrics</strong>
+        </a>
+
+        <a href="/view-leave-request">
+            <strong>Leave Approval</strong>
+        </a>
+
+        <a href="/supervisor_com_att">
+            <strong>Attendance Log</strong>
+        </a>
+
+        <a href="/view-complaint-supervisor">
+            <strong>Grievances</strong>
+        </a>
+    </div>
+
+    <!-- Main content -->
+    <div class="container">
+        <h2>Work Schedule for Supervisor: Yuthika</h2>
+
+        <!-- Static content -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Priority</th>
+                    <th>Deadline</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>I need 50 units</td>
+                    <td>Medium</td>
+                    <td>2024-09-25</td>
+                </tr>
+                >
+            </tbody>
+        </table>
+
+    </div>
+
+</body>
+
+</html>

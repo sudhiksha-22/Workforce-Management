@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Metrics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .navbar {
+            width: 250px;
+            height: 100vh;
+            background-color: #0E4AA0;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+        }
+
+        .navbar nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .navbar nav ul li {
+            margin-bottom: 20px;
+        }
+
+        .navbar nav ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar nav ul li a:hover {
+            background-color: #003c7a;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 25px;
+            margin: 0 auto;
+            max-width: 1100px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+        }
+
+        .container h1 {
+            color: #0E4AA0;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table thead {
+            background-color: #0E4AA0;
+            color: white;
+        }
+
+        table th,
+        table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-size: 0.9rem;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        table th {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        table td {
+            color: #333;
+        }
+
+        .result {
+            font-weight: bold;
+            color: #0E4AA0;
+        }
+
+        /* Button */
+        .update-button {
+            display: inline-block;
+            background-color: #0E4AA0;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .update-button:hover {
+            background-color: #003c7a;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                margin-left: 0;
+                padding: 10px;
+            }
+
+            .navbar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                box-shadow: none;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            table th,
+            table td {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <h2>Supervisor Dashboard</h2>
+        <nav>
+            <ul>
+                <li><a href="/profile">
+                        <strong>Profile</strong>
+                    </a></li>
+                <li><a href="/supervisor_schedule">
+                        <strong>Work Schedule</strong>
+                    </a></li>
+                <li><a href="/allocate_work">
+                        <strong>Allocate Work</strong>
+                    </a></li>
+                <li><a href="/current_shift_schedule">
+                        <strong>Current Shift Status</strong>
+                    </a></li>
+                <li><a href="/generate_report">
+                        <strong>Staff remarks</strong>
+                    </a></li>
+                <li><a href="/key_metrics">
+                        <strong>Performance metrics</strong>
+                    </a></li>
+                <li><a href="/view-leave-request">
+                        <strong>Leave Approval</strong>
+                    </a></li>
+                <li><a href="/supervisor_com_att">
+                        <strong>Attendance Log</strong>
+                    </a></li>
+                <li><a href="/view-complaint-supervisor">
+                        <strong>Grievances</strong>
+                    </a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Employee Performance Metrics</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee Name</th>
+                    <th>Attendance Rate (%)</th>
+                    <th>Task Completion Rate (%)</th>
+                    <th>Task Efficiency (tasks/hour)</th>
+                    <th>Quality Score (%)</th>
+                    <th>Timeliness (%)</th>
+                    <th>Days Present</th>
+                    <th>Final KPM</th>
+                </tr>
+            </thead>
+            <tbody id="employee-table-body">
+                <!-- Rows will be populated dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Example data for 20 employees
+        const employees = [
+            { name: 'John Doe', attendanceRate: 95, taskCompletionRate: 90, taskEfficiency: 1.2, qualityScore: 85, timeliness: 80, daysPresent: 22 },
+            { name: 'Jane Smith', attendanceRate: 97, taskCompletionRate: 88, taskEfficiency: 1.5, qualityScore: 90, timeliness: 85, daysPresent: 23 },
+            { name: 'Michael Johnson', attendanceRate: 92, taskCompletionRate: 85, taskEfficiency: 1.1, qualityScore: 80, timeliness: 75, daysPresent: 21 },
+            { name: 'Emily Davis', attendanceRate: 94, taskCompletionRate: 89, taskEfficiency: 1.3, qualityScore: 88, timeliness: 83, daysPresent: 24 },
+            { name: 'David Wilson', attendanceRate: 93, taskCompletionRate: 87, taskEfficiency: 1.4, qualityScore: 82, timeliness: 82, daysPresent: 23 },
+            { name: 'Sophia Brown', attendanceRate: 90, taskCompletionRate: 86, taskEfficiency: 1.0, qualityScore: 78, timeliness: 70, daysPresent: 20 },
+            { name: 'Lucas Taylor', attendanceRate: 96, taskCompletionRate: 92, taskEfficiency: 1.2, qualityScore: 89, timeliness: 84, daysPresent: 24 },
+            { name: 'Olivia Martin', attendanceRate: 89, taskCompletionRate: 80, taskEfficiency: 0.9, qualityScore: 76, timeliness: 72, daysPresent: 19 },
+            { name: 'Noah Anderson', attendanceRate: 98, taskCompletionRate: 95, taskEfficiency: 1.6, qualityScore: 91, timeliness: 90, daysPresent: 25 },
+            { name: 'Ava Thomas', attendanceRate: 97, taskCompletionRate: 93, taskEfficiency: 1.5, qualityScore: 90, timeliness: 88, daysPresent: 24 },
+            { name: 'James Lee', attendanceRate: 91, taskCompletionRate: 88, taskEfficiency: 1.1, qualityScore: 80, timeliness: 77, daysPresent: 22 },
+            { name: 'Mia Harris', attendanceRate: 92, taskCompletionRate: 87, taskEfficiency: 1.3, qualityScore: 83, timeliness: 79, daysPresent: 21 },
+            { name: 'Elijah White', attendanceRate: 93, taskCompletionRate: 89, taskEfficiency: 1.2, qualityScore: 84, timeliness: 81, daysPresent: 23 },
+            { name: 'Amelia Lewis', attendanceRate: 90, taskCompletionRate: 84, taskEfficiency: 1.0, qualityScore: 79, timeliness: 75, daysPresent: 20 },
+            { name: 'William Clark', attendanceRate: 88, taskCompletionRate: 82, taskEfficiency: 0.9, qualityScore: 77, timeliness: 74, daysPresent: 19 },
+            { name: 'Evelyn Walker', attendanceRate: 94, taskCompletionRate: 91, taskEfficiency: 1.4, qualityScore: 88, timeliness: 85, daysPresent: 24 },
+            { name: 'Benjamin King', attendanceRate: 93, taskCompletionRate: 89, taskEfficiency: 1.2, qualityScore: 82, timeliness: 79, daysPresent: 22 },
+            { name: 'Charlotte Hall', attendanceRate: 95, taskCompletionRate: 90, taskEfficiency: 1.3, qualityScore: 85, timeliness: 83, daysPresent: 23 },
+            { name: 'Henry Allen', attendanceRate: 96, taskCompletionRate: 92, taskEfficiency: 1.5, qualityScore: 90, timeliness: 87, daysPresent: 24 },
+            { name: 'Victoria Young', attendanceRate: 92, taskCompletionRate: 88, taskEfficiency: 1.1, qualityScore: 83, timeliness: 78, daysPresent: 22 },
+        ];
+
+        function calculateKPM(employee) {
+            const { attendanceRate, taskCompletionRate, taskEfficiency, qualityScore, timeliness, daysPresent } = employee;
+
+            // Calculate I (attendance impact)
+            const I = 1 - (25 - daysPresent) / 25;
+
+            // Calculate KPM without attendance adjustment
+            const KPM = (0.1 * attendanceRate) +
+                (0.4 * taskCompletionRate) +
+                (0.2 * taskEfficiency * 100) +
+                (0.2 * qualityScore) +
+                (0.1 * timeliness);
+
+            // Calculate Final KPM
+            const finalKPM = KPM * I;
+
+            return { KPM: KPM.toFixed(2), finalKPM: finalKPM.toFixed(2) };
+        }
+
+        function populateEmployeeTable() {
+            const tbody = document.getElementById('employee-table-body');
+
+            employees.forEach(employee => {
+                const { KPM, finalKPM } = calculateKPM(employee);
+
+                // Create a row for each employee
+                const row = `
+                <tr>
+                    <td>${employee.name}</td>
+                    <td>${employee.attendanceRate}</td>
+                    <td>${employee.taskCompletionRate}</td>
+                    <td>${employee.taskEfficiency}</td>
+                    <td>${employee.qualityScore}</td>
+                    <td>${employee.timeliness}</td>
+                    <td>${employee.daysPresent}</td>
+                    <td class="result">${finalKPM}</td>
+                </tr>
+            `;
+
+                // Append the row to the table body
+                tbody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        // Populate the table on page load
+        window.onload = populateEmployeeTable;
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Supervisor View Complaints</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      height: 100vh;
+      display: flex;
+    }
+
+    /* Left-aligned Navbar */
+    .navbar {
+      background-color: #0e4aa0;
+      color: white;
+      width: 250px;
+      height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar h2 {
+      margin-bottom: 20px;
+    }
+
+    .navbar nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .navbar nav ul li {
+      margin: 15px 0;
+    }
+
+    .navbar nav ul li a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .navbar nav ul li a:hover {
+      background-color: #0C3A7B;
+    }
+
+    /* Main Content Section */
+    .content {
+      flex-grow: 1;
+      padding: 40px;
+      background-color: white;
+      overflow-y: auto;
+    }
+
+    .container {
+      max-width: 100%;
+      margin: 20px 0;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .header h2 {
+      margin: 0;
+      color: #0e4aa0;
+    }
+
+    .header button {
+      padding: 10px 20px;
+      background-color: #0e4aa0;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .header button:hover {
+      background-color: #0b3e7f;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #ddd;
+    }
+
+    th,
+    td {
+      padding: 15px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    td button {
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    td button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <h2>Supervisor Dashboard</h2>
+    <nav>
+      <ul>
+        <li><a href="/profile">
+            <strong>Profile</strong>
+          </a></li>
+        <li><a href="/supervisor_schedule">
+            <strong>Work Schedule</strong>
+          </a></li>
+        <li><a href="/allocate_work">
+            <strong>Allocate Work</strong>
+          </a></li>
+        <li><a href="/current_shift_schedule">
+            <strong>Current Shift Status</strong>
+          </a></li>
+        <li><a href="/generate_report">
+            <strong>Staff remarks</strong>
+          </a></li>
+        <li><a href="/key_metrics">
+            <strong>Performance metrics</strong>
+          </a></li>
+        <li><a href="/view-leave-request">
+            <strong>Leave Approval</strong>
+          </a></li>
+        <li><a href="/supervisor_com_att">
+            <strong>Attendance Log</strong>
+          </a></li>
+        <li><a href="/view-complaint-supervisor">
+            <strong>Grievances</strong>
+          </a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <div class="container">
+      <div class="header">
+        <h2>Complaints</h2>
+        <button onclick="window.location.href='raise_complaint.html'">
+          Raise a Complaint
+        </button>
+      </div>
+
+      <table>
+        <tr>
+          <th>Employee Name</th>
+          <th>Complaint</th>
+          <th>Action</th>
+        </tr>
+        {% for employee, details in dict.items() %}
+        <tr>
+          <td>{{ employee }}</td>
+          <td>{{ details }}</td>
+          <td>
+            <!-- Button to review the complaint -->
+            <form action="/review-complaint-supervisor" method="POST">
+              <input type="hidden" name="username" value="{{ employee }}" />
+              <button type="submit" name="action" value="review">
+                Review
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Shift Status</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .navbar {
+            width: 250px;
+            height: 100vh;
+            background-color: #0E4AA0;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .navbar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .navbar nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .navbar nav ul li {
+            margin: 15px 0;
+        }
+
+        .navbar nav ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .navbar nav ul li a:hover {
+            background-color: #0C3A7B;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .phase-section {
+            margin-bottom: 30px;
+        }
+
+        .phase-title {
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #0E4AA0;
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .status-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .status-table th,
+        .status-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .status-table th {
+            background-color: #0E4AA0;
+            color: white;
+        }
+
+        .status-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .status-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .button {
+            background-color: #0E4AA0;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button:hover {
+            background-color: #0b3e7f;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <h2>Supervisor Dashboard</h2>
+        <nav>
+            <ul>
+                <li><a href="/profile">
+                        <strong>Profile</strong>
+                    </a></li>
+                <li><a href="/supervisor_schedule">
+                        <strong>Work Schedule</strong>
+                    </a></li>
+                <li><a href="/allocate_work">
+                        <strong>Allocate Work</strong>
+                    </a></li>
+                <li><a href="/current_shift_schedule">
+                        <strong>Current Shift Status</strong>
+                    </a></li>
+                <li><a href="/generate_report">
+                        <strong>Staff remarks</strong>
+                    </a></li>
+                <li><a href="/key_metrics">
+                        <strong>Performance metrics</strong>
+                    </a></li>
+                <li><a href="/view-leave-request">
+                        <strong>Leave Approval</strong>
+                    </a></li>
+                <li><a href="/supervisor_com_att">
+                        <strong>Attendance Log</strong>
+                    </a></li>
+                <li><a href="/view-complaint-supervisor">
+                        <strong>Grievances</strong>
+                    </a></li>
+            </ul>
+        </nav>
+    </div>
+    <!-- Main Content Section -->
+    <div class="container">
+
+
+        {% for phase, employees in employee_data.items() %}
+        <div class="phase-section">
+            <div class="phase-title">{{ phase }}</div>
+            <table class="status-table">
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Name</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee in employees %}
+                    <tr>
+                        <td>{{ employee.id }}</td>
+                        <td>{{ employee.name }}</td>
+                        <td>{{ employee.availability }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

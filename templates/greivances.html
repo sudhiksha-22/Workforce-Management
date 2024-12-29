@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Grievances</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            height: 100vh;
+            display: flex;
+        }
+
+        /* Left-aligned Navbar */
+        .navbar {
+            background-color: #0E4AA0;
+            color: white;
+            width: 250px;
+            height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar h2 {
+            margin-bottom: 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #0E4AA0;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .navbar a:hover {
+            background-color: #0b3e7f;
+        }
+
+        /* Main Content Section */
+        .content {
+            flex-grow: 1;
+            padding: 40px;
+            background-color: white;
+            overflow-y: auto;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 20px 0;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header h2 {
+            margin: 0;
+            color: #0E4AA0;
+        }
+
+        .header button {
+            padding: 10px 20px;
+            background-color: #0E4AA0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .header button:hover {
+            background-color: #0b3e7f;
+        }
+
+        .complaints-list {
+            border: 1px solid #ddd;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .complaints-list h3 {
+            margin-bottom: 15px;
+            color: #0E4AA0;
+        }
+
+        .complaint-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+            margin-bottom: 10px;
+        }
+
+        .complaint-info {
+            flex-grow: 1;
+        }
+
+        .complaint-info p {
+            margin: 0;
+        }
+
+        .complaint-info .employee-id {
+            font-weight: bold;
+        }
+
+        .complaint-info .subject {
+            font-style: italic;
+            color: #555;
+        }
+
+        .complaint-item button {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .complaint-item button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <h2>Supervisor Dashboard</h2>
+        <nav>
+            <ul>
+                <li><a href="/profile">
+                        <strong>Profile</strong>
+                    </a></li>
+                <li><a href="/supervisor_schedule">
+                        <strong>Work Schedule</strong>
+                    </a></li>
+                <li><a href="/allocate_work">
+                        <strong>Allocate Work</strong>
+                    </a></li>
+                <li><a href="/current_shift_schedule">
+                        <strong>Current Shift Status</strong>
+                    </a></li>
+                <li><a href="/generate_report">
+                        <strong>Staff remarks</strong>
+                    </a></li>
+                <li><a href="/key_metrics">
+                        <strong>Performance metrics</strong>
+                    </a></li>
+                <li><a href="/view-leave-request">
+                        <strong>Leave Approval</strong>
+                    </a></li>
+                <li><a href="/supervisor_com_att">
+                        <strong>Attendance Log</strong>
+                    </a></li>
+                <li><a href="/view-complaint-supervisor">
+                        <strong>Grievances</strong>
+                    </a></li>
+            </ul>
+        </nav>
+    </div>
+
+
+    <!-- Main Content -->
+    <div class="content">
+        <div class="container">
+            <div class="header">
+                <h2>Employee Grievances</h2>
+                <button onclick="window.location.href='raise_complaint.html'">Raise a Complaint</button>
+            </div>
+
+            <div class="complaints-list">
+                <h3>Complaints Raised:</h3>
+
+                <div class="complaint-item">
+                    <div class="complaint-info">
+                        <p>From: <span class="employee-id">Emp1</span></p>
+                        <p class="subject">Issue with Machine</p>
+                    </div>
+                    <button onclick="window.location.href='review_complaint.html?complaint=1'">Review</button>
+                </div>
+
+                <div class="complaint-item">
+                    <div class="complaint-info">
+                        <p>From: <span class="employee-id">Emp2</span></p>
+                        <p class="subject">Personal Issue</p>
+                    </div>
+                    <button onclick="window.location.href='review_complaint.html?complaint=2'">Review</button>
+                </div>
+
+                <div class="complaint-item">
+                    <div class="complaint-info">
+                        <p>From: <span class="employee-id">Emp3</span></p>
+                        <p class="subject">Workplace Dispute</p>
+                    </div>
+                    <button onclick="window.location.href='review_complaint.html?complaint=3'">Review</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

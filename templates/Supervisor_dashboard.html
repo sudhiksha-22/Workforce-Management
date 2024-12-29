@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supervisor Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        /* Left-aligned Navbar with Dashboard Features */
+        .navbar {
+            background-color: #0E4AA0;
+            color: white;
+            width: 250px;
+            height: 100vh;
+            padding: 20px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar h2 {
+            margin-bottom: 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #0E4AA0;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .navbar a:hover {
+            background-color: #0b3e7f;
+        }
+
+        .navbar p {
+            color: white;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        /* Positioning the supervisor's name at the top right corner */
+        .supervisor-name {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 18px;
+            color: #0E4AA0;
+            font-weight: bold;
+        }
+
+        /* Adding alerts box */
+        .alerts-box {
+            background-color: #fff4e6;
+            border-left: 4px solid #ff9900;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .alerts-box h3 {
+            color: #ff9900;
+            margin-bottom: 10px;
+        }
+
+        /* Adding graphs section */
+        .graphs {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .graph {
+            width: 100%;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .graph h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #0E4AA0;
+        }
+
+        canvas {
+            width: 100% !important;
+            max-height: 400px;
+        }
+
+        /* Specific resizing for the pie chart box */
+        .pie-chart-box {
+            height: 500px;
+        }
+
+        .pie-chart-box canvas {
+            height: 350px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Supervisor's name at the top right corner -->
+    <div class="supervisor-name">
+        Supervisor: {{username}}
+    </div>
+
+    <div class="container">
+        <!-- Left Navbar with Features -->
+        <div class="navbar">
+            <h2>Supervisor Dashboard</h2>
+
+            <a href="/profile">
+                <strong>Profile</strong>
+            </a>
+
+            <a href="/supervisor_schedule">
+                <strong>Work Schedule</strong>
+            </a>
+
+            <a href="/allocate_work">
+                <strong>Allocate Work</strong>
+            </a>
+
+            <a href="/current_shift_schedule">
+                <strong>Current Shift Status</strong>
+            </a>
+
+            <a href="/generate_report">
+                <strong>Staff remarks</strong>
+            </a>
+
+            <a href="/key_metrics">
+                <strong>Performance metrics</strong>
+            </a>
+
+            <a href="/view-leave-request">
+                <strong>Leave Approval</strong>
+            </a>
+
+            <a href="/supervisor_com_att">
+                <strong>Attendance Log</strong>
+            </a>
+
+            <a href="/view-complaint-supervisor">
+                <strong>Grievances</strong>
+            </a>
+        </div>
+
+        <!-- Content Section for Alerts and Graphs -->
+        <div class="content">
+            <!-- Alerts Box -->
+            <div class="alerts-box">
+                <h3>Incoming Alerts</h3>
+                <p><strong>Manager:</strong> Please review the leave requests and update the task allocations for the night shift.</p>
+                <p><strong>Manager:</strong> Urgent machine maintenance required in Assembly Line 2.</p>
+            </div>
+
+            <h2>Today's Overview</h2>
+
+            <!-- Graphs Section -->
+            <div class="graphs">
+                <!-- Performance & Task Completion Graph -->
+                <div class="graph">
+                    <h3>Performance & Task Completion Over Time</h3>
+                    <canvas id="performanceTaskChart"></canvas>
+                    <p style="text-align: center; margin-top: 10px;">Current Production: 75%</p>
+                </div>
+
+                <!-- Work Distribution by Department -->
+                <div class="graph pie-chart-box">
+                    <h3>Work Distribution by Department</h3>
+                    <canvas id="departmentWorkChart"></canvas>
+                    <p style="text-align: center; margin-top: 10px;">Task Distribution Across Departments</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Adding Chart.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Line chart for Performance & Task Completion Over Time
+        var ctx = document.getElementById('performanceTaskChart').getContext('2d');
+        var performanceTaskChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['12:00', '14:00', '16:00', '18:00', '20:00', '22:00', '24:00'],
+                datasets: [
+                    {
+                        label: 'Performance (%)',
+                        data: [50, 60, 70, 65, 80, 85, 75],
+                        borderColor: 'rgba(14, 74, 160, 1)',
+                        backgroundColor: 'rgba(14, 74, 160, 0.2)',
+                        fill: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Task Completion (%)',
+                        data: [30, 40, 50, 60, 70, 85, 90],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        fill: true,
+                        tension: 0.3
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time of Day (Hours)'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Percentage (%)'
+                        },
+                        min: 0,
+                        max: 100
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+
+        // Pie chart for Work Distribution by Department
+        var deptCtx = document.getElementById('departmentWorkChart').getContext('2d');
+        var departmentWorkChart = new Chart(deptCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Production', 'Assembly Line', 'Quality Check', 'Other Departments'],
+                datasets: [{
+                    label: 'Work Distribution',
+                    data: [40, 25, 20, 15], // Example data for department work done
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
