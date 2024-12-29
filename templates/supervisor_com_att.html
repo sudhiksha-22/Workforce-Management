@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .dashboard-container {
+            background-color: #fff;
+            padding: 40px;
+            height:500px;
+            width:600px
+            border-radius:20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display:flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 28px;
+        }
+
+        p{
+            font-size:18px;
+            color: #666
+            margin-bottom: 30px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-evenly;
+            gap: 20px;
+        }
+
+        .button {
+            width: 180px;
+            height: 180px;
+            background-color: #3498db;
+            color: white;
+            font-size: 20px;
+            border: none;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+        }
+
+        .button:active {
+            background-color: #1f639a;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Welcome, {{ username }}!</h1>
+        <p>Select an option to view attendance logs:</p>
+        
+        <div class="button-container">
+            <!-- Button to view the logged-in user's attendance -->
+            <button class="button" onclick="window.location.href='/supervisor_attendance'">
+                View My Attendance
+            </button>
+
+            <!-- Button to view all staff attendance -->
+            <button class="button" onclick="window.location.href='/all_staff_attendance'">
+                View All Staff Attendance
+            </button>
+        </div>
+    </div>
+</body>
+</html>
