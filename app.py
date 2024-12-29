@@ -487,7 +487,7 @@ def review_complaint_supervisor():
     print(username)
     complaint_description = r.hget(username, 's_complaint_description')
     print(complaint_description)
-    return render_template('Supervisor_review_complaint.html', complaint_description=complaint_description)
+    return render_template('supervisor_review_complaint.html', complaint_description=complaint_description)
 
 
 
