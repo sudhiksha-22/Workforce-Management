@@ -195,7 +195,7 @@ def view_leave():
                 email = r.hget(key, 'email')
                 dict[key] = [leave_reason, email]
     print(dict)
-    return render_template('Supervisor_View_leave.html', dict=dict)
+    return render_template('Supervisor_view_leave.html', dict=dict)
 
 
 @app.route('/staff_leave_request_action', methods=['POST'])
