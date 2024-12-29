@@ -92,7 +92,7 @@ def register():
 @app.route('/forms', methods=['GET'])
 def forms_page():
     # Instead of running the script in Flask, redirect to Streamlit app
-    streamlit_url = 'http://localhost:8501'  # The URL where your Streamlit app is running
+    streamlit_url =  'http://10.220.225.190:10000' #'http://localhost:8501'  # The URL where your Streamlit app is running
     return redirect(streamlit_url)
 
 
