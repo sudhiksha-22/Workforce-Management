@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allocate Work</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        .navbar {
+            width: 250px;
+            height: 100vh;
+            background-color: #0E4AA0;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .navbar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .navbar nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .navbar nav ul li {
+            margin: 15px 0;
+        }
+
+        .navbar nav ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .navbar nav ul li a:hover {
+            background-color: #0C3A7B;
+        }
+
+        .allocate-work-container {
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .allocate-work-container h3 {
+            color: #0E4AA0;
+            margin-bottom: 20px;
+        }
+
+        .allocate-work-container button {
+            background-color: #0E4AA0;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 16px;
+        }
+
+        .allocate-work-container button:hover {
+            background-color: #003c7a;
+        }
+
+        .work-allocation {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .work-allocation th,
+        .work-allocation td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .work-allocation th {
+            background-color: #0E4AA0;
+            color: white;
+        }
+
+        .allocate-button {
+            background-color: #0E4AA0;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .allocate-button:hover {
+            background-color: #003c7a;
+        }
+
+        .edit-button {
+            background-color: orange;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .edit-button:hover {
+            background-color: #e68a00;
+        }
+
+        .remove-button {
+            background-color: red;
+            color: white;
+            padding: 6px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .remove-button:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <h2>Supervisor Dashboard</h2>
+        <nav>
+            <ul>
+                <li><a href="/profile">
+                        <strong>Profile</strong>
+                    </a></li>
+                <li><a href="/supervisor_schedule">
+                        <strong>Work Schedule</strong>
+                    </a></li>
+                <li><a href="/allocate_work">
+                        <strong>Allocate Work</strong>
+                    </a></li>
+                <li><a href="/current_shift_schedule">
+                        <strong>Current Shift Status</strong>
+                    </a></li>
+                <li><a href="/generate_report">
+                        <strong>Staff remarks</strong>
+                    </a></li>
+                <li><a href="/key_metrics">
+                        <strong>Performance metrics</strong>
+                    </a></li>
+                <li><a href="/view-leave-request">
+                        <strong>Leave Approval</strong>
+                    </a></li>
+                <li><a href="/supervisor_com_att">
+                        <strong>Attendance Log</strong>
+                    </a></li>
+                <li><a href="/view-complaint-supervisor">
+                        <strong>Grievances</strong></a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Phase Selection Section -->
+    <div class="allocate-work-container">
+        <h3>Select a Phase:</h3>
+        <form method="GET" action="/allocate_work">
+            <button type="submit" name="phase" value="Raw Material Production">Raw Material Production</button>
+            <button type="submit" name="phase" value="Assembly">Assembly</button>
+            <button type="submit" name="phase" value="Quality Check">Quality Check</button>
+            <button type="submit" name="phase" value="Packaging">Packaging</button>
+        </form>
+    </div>
+
+    <!-- Employee List Section -->
+    <form method="POST" action="/allocate_shifts/{{ phase }}">
+        <div class="employee-list-container">
+            <h3>Employee List for Phase: {{ phase }}</h3>
+            <table class="work-allocation">
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Employee Name</th>
+                        <th>KPM</th>
+                        <th>Shift</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for emp in employees %}
+                    <tr>
+                        <td>{{ emp.id }}</td>
+                        <td>{{ emp.name }}</td>
+                        <td>{{ emp.kpm }}</td>
+                        <td>{{ emp.shift or 'Not Assigned' }}</td>
+                        <input type="hidden" name="shift_{{ emp.id }}" value="{{ emp.shift }}">
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit">Submit and Update Shifts</button>
+        </div>
+    </form>
+</body>
+
+</html>
