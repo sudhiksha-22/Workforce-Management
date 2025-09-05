@@ -8,9 +8,9 @@ from sklearn.metrics import pairwise
 from datetime import datetime
 
 # Connect to Redis Client
-hostname = 'redis-17795.c325.us-east-1-4.ec2.redns.redis-cloud.com'
-port = 17795
-password = 'fLnGGZUuGeBFOSOo21yPBi8Z9B08AgZJ'
+hostname = 'redis-12236.c330.asia-south1-1.gce.redns.redis-cloud.com'
+port = 12236
+password = 'VmbHPxUWskFhjrD4joY9LOWdQuecA4nO'
 
 r = redis.StrictRedis(host=hostname, port=port, password=password)
 
